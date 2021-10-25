@@ -9,7 +9,7 @@ struct ThingModel {
     var type: String?
     var uuid: String?
     var index: NSNumber?
-    var modelCell: ThingCell?
+ //   var modelCell: ThingCell?
     
     init(name: String) {
         self.name = name
@@ -18,8 +18,7 @@ struct ThingModel {
     mutating func setLike(value: Bool) {
         
         like = value
-//        SS: UI shouldn't be used in the Model class.
-        modelCell?.update(withLikeValue: value)
+  //      modelCell?.update(withLikeValue: value)
     }
 }
 
