@@ -71,6 +71,14 @@ extension NetworkLayer {
         
         downloadTask.resume()
     }
+    
+    func downloadImage(from url : URL, completion : @escaping (_ data : Data?, _ response: URLResponse?, _ error: Error?) -> Void) {
+        let dataTask = session.dataTask(with: url, completionHandler: {
+            (data, response, error) in
+            completion(data,response,error)
+        })
+        dataTask.resume()
+    }
 }
 
 
