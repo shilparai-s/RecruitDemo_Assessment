@@ -26,7 +26,6 @@ class ThingDetailsView: UIView {
         buttons.axis = .horizontal
         buttons.alignment = .center
         buttons.distribution = .equalSpacing
-        buttons.spacing = 10.0
         addSubview(buttons)
         
         setNeedsUpdateConstraints()
@@ -48,15 +47,15 @@ class ThingDetailsView: UIView {
         let imageSize: CGFloat = 300.0
         imageView.topAnchor.constraint(equalTo: topAnchor, constant: 70.0).isActive = true
         imageView.leftAnchor.constraint(equalTo: leftAnchor, constant: padding).isActive = true
-        imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: imageSize).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: imageSize).isActive = true
         
         let buttonSize: CGFloat = 50.0
-        buttons.widthAnchor.constraint(equalToConstant: 120).isActive = true
+       buttons.widthAnchor.constraint(equalToConstant: 120).isActive = true
+
         likeButton.heightAnchor.constraint(equalToConstant: buttonSize).isActive = true
         likeButton.widthAnchor.constraint(equalToConstant: buttonSize).isActive = true
-        
+
         dislikeButton.heightAnchor.constraint(equalToConstant: buttonSize).isActive = true
         dislikeButton.widthAnchor.constraint(equalToConstant: buttonSize).isActive = true
         
