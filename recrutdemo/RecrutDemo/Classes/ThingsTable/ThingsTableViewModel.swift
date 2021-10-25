@@ -1,20 +1,30 @@
 import Foundation
 
+
 struct ThingsTableViewModel {
     
     let imageProvider = ImageProvider()
-    var things = mockData()
+    //private var things = mockData()
     var datasourceCount: Int {
-        return things.count
+        return thingsViewModel.count
     }
     
-    func thing(for indexPath: IndexPath) -> ThingModel {
-        return things[indexPath.row]
+    var thingsViewModel : [ThingCellViewModel] =  {
+        let things = mockData()
+        let viewModel = things.compactMap( {
+            ThingCellViewModel(name: $0.name, isLiked: Observable($0.like), image: $0.image)
+        })
+        return viewModel
+    }()
+    
+    mutating func thing(for indexPath: IndexPath) -> ThingCellViewModel {
+        return self.thingsViewModel[indexPath.row]
     }
     
     mutating func bindModelWithView(cell: ThingCell, at indexPath: IndexPath) {
-        things[indexPath.row].modelCell = cell
+       // things[indexPath.row].modelCell = cell
     }
+    
 }
 
 

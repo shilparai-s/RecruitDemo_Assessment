@@ -24,6 +24,8 @@ class ThingCell: UITableViewCell {
         }
     }
     
+    
+        
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         
@@ -37,16 +39,13 @@ class ThingCell: UITableViewCell {
         contentView.addSubview(nameLabel)
         contentView.addSubview(thingImage)
         contentView.addSubview(likeImage)
-        addShadow()
     }
     
     convenience init() {
         self.init(style: .default, reuseIdentifier: "")
 
         nameLabel.text = "Undefined thing name"
- 
-//        SS: This is a block operation, The UI update Should be done in Main thread.
-        updateThingImage = { image in
+        updateThingImage = { [unowned self] image in
             self.change(image: image, in: self.thingImage)
         }
     }
@@ -77,6 +76,11 @@ class ThingCell: UITableViewCell {
         thingImage.backgroundColor = UIColor.clear
         thingImage.layer.masksToBounds = true
         thingImage.layer.cornerRadius = 10.0
+        
+        thingImage.layer.shadowOffset = CGSize(width: 0.5, height: 1.0)
+        thingImage.layer.shadowOpacity = 0.3
+        thingImage.layer.shadowRadius = 2.0
+
     }
     
     func update(withText: String) {
@@ -131,6 +135,11 @@ class ThingCell: UITableViewCell {
         thingImage.layer.shadowOffset = CGSize(width: 0.5, height: 1.0)
         thingImage.layer.shadowOpacity = 0.3
         thingImage.layer.shadowRadius = 2.0
+    }
+    
+    func setupViewModel(viewModel : ThingCellViewModel) {
+        nameLabel.text = viewModel.name
+        
     }
 }
 
