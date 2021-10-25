@@ -4,7 +4,7 @@ import UIKit
 class ThingDetailsViewController: UIViewController {
     
     private let baseView = ThingDetailsView()
-    var thingModel: ThingModel!
+    var thingViewModel: ThingCellViewModel!
     var imageProvider: ImageProvider!
     var delegate: ThingDetailsDelegate? = nil
     
@@ -21,7 +21,7 @@ class ThingDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        title = thingModel.name
+        title = thingViewModel.name
         
         baseView.likeButton.addTarget(self, action: #selector(didTapLikeButton), for: .touchUpInside)
         baseView.dislikeButton.addTarget(self, action: #selector(didTapDislikeButton), for: .touchUpInside)
@@ -30,20 +30,20 @@ class ThingDetailsViewController: UIViewController {
     }
     
     @objc func didTapCloseButton() {
-        delegate?.thingDetails(viewController: self, willDismiss: &thingModel!)
+        delegate?.thingDetails(viewController: self, willDismiss: &thingViewModel!)
     }
     
     @objc func didTapLikeButton() {
-        delegate?.thingDetails(viewController: self, didLike: &thingModel!)
+        delegate?.thingDetails(viewController: self, didLike: &thingViewModel!)
     }
     @objc
     func didTapDislikeButton() {
-        delegate?.thingDetails(viewController: self, didDislike: &thingModel!)
+        delegate?.thingDetails(viewController: self, didDislike: &thingViewModel!)
     }
     
     func displayImage() {
         
-        if let urlString = thingModel.image {
+        if let urlString = thingViewModel.image {
             imageProvider.imageAsync(from: urlString, completion: { (image, imageUrl) in
                 self.baseView.setThing(image: image)
             })
